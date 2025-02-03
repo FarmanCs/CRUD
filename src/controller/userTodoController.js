@@ -87,6 +87,20 @@ const replaceTodoes = async (req, res) => {
    }
 }
 
+const deleteTodolist = async (req, res) => {
+   try {
+      const user_id = req.params.id
 
-module.exports = { todoesData, getTodoesData, getTodoesDataById, updateTodoeslist, replaceTodoes }
+      const deletedata = await todoes.findByIdAndDelete(
+         { _id: user_id },
+         // req.body,
+         { new: true })
+      res.status(200).send(deletedata)
+   } catch (error) {
+      res.status(400).send(error.message)
+   }
+}
+
+
+module.exports = { todoesData, getTodoesData, getTodoesDataById, updateTodoeslist, replaceTodoes, deleteTodolist }
 
