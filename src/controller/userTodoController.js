@@ -12,6 +12,8 @@ const todoesData = async (req, res) => {
          task,
       })
       const data = await todoData.save()
+      console.log(data);
+
       req.todo = data
       res.status(201).json({ data })
    } catch (error) {
