@@ -13,11 +13,10 @@ const todoAuth = async (req, res, next) => {
          throw new Error("token decoding problem")
       }
       const { _id } = decodedMessage
-      console.log("User_ID: ", _id);
+      // console.log("User_ID: ", _id);
 
       const userData = await userModel.userInfo.findById({ _id: _id })
       // console.log(userData);
-
       if (!userData) {
          throw new Error("cant post before signUp")
       }

@@ -29,6 +29,10 @@ const CreateUser = async (req, res) => {
 
 const getUserData = async (req, res) => {
    try {
+      const token = req.cookies
+      if (!token) {
+         throw new Error("Token is not valide any more ")
+      }
       const userData = await userSchema.userInfo.find({})
       res.status(200).send(userData)
    } catch (error) {
@@ -40,14 +44,22 @@ const getUserDataById = async (req, res) => {
    try {
       const uid = req.params.id
       const { token } = req.cookies
-      // console.log(token);
+      console.log("userid", typeof (uid), uid);
 
       if (!token) {
          throw new Error("Token is not valide any more ")
       }
       const decodeToken = await jwt.verify(token, process.env.PRIVATE_KEY)
-      const { id } = decodeToken
-      const userData = await userSchema.userInfo.findById({ _id: id })
+      if (!decodeToken) {
+         throw new Error("Token decoding problem...!")
+      }
+      const { _id } = decodeToken
+      console.log("Decoded and De_Structuring id ", typeof (_id), _id);
+
+      if (!(uid == _id)) {
+         throw new Error("user is not login...")
+      }
+      const userData = await userSchema.userInfo.findById({ _id: _id })
       res.status(200).send(userData)
 
    } catch (error) {
