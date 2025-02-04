@@ -10,7 +10,7 @@ const { logInUser } = require("../controller/userLogIn")
 userRouter.post("/user", userAuth, CreateUser)
 userRouter.post("/user/logIn", UserLogInAuth, logInUser)
 
-userRouter.get('/user', getUserData)
+userRouter.get('/user', UserLogInAuth, getUserData)
 userRouter.get('/user/:id', getUserDataById)
 userRouter.patch('/user/update/:id', updateUser)
 userRouter.put('/user/replace/:id', replaceUser)

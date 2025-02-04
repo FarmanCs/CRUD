@@ -19,6 +19,7 @@ const CreateUser = async (req, res) => {
       })
       const user = await userData.save()
       res.status(201).json({
+         message: "new user added successfully",
          user
       })
    } catch (error) {
