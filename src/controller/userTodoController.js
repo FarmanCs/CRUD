@@ -24,23 +24,6 @@ const todoesData = async (req, res) => {
 
 const getTodoesData = async (req, res) => {
    try {
-      // const uid = req.user._id
-      // // const { token } = req.cookies
-      // console.log("userid", uid);
-
-      // if (!token) {
-      //    throw new Error("Token is not valide any more ")
-      // }
-      // const decodeToken = await jwt.verify(token, process.env.PRIVATE_KEY)
-      // if (!decodeToken) {
-      //    throw new Error("Token decoding problem...!")
-      // }
-      // const { _id } = decodeToken
-      // console.log("Decoded and De_Structuring id ", typeof (_id), _id);
-
-      // if (!(uid == _id)) {
-      //    throw new Error("user is not login...")
-      // }
       const userData = await todoes.find({})
       res.status(200).send(userData)
 

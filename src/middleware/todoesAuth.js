@@ -15,7 +15,7 @@ const todoAuth = async (req, res, next) => {
       const { _id } = decodedMessage
       // console.log("User_ID: ", _id);
 
-      const userData = await userModel.userInfo.findById({ _id: _id })
+      const userData = await userModel.findById({ _id: _id })
       // console.log(userData);
       if (!userData) {
          throw new Error("cant post before signUp")

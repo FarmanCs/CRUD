@@ -8,7 +8,7 @@ const CreateUser = async (req, res) => {
    try {
       const { name, email, address, gender, contact, skills, password } = req.body
       const hashedPassword = await bycrpt.hash(password, 10)
-      const userData = new userSchema.userInfo({
+      const userData = new userSchema({
          name,
          email,
          address,
@@ -30,11 +30,11 @@ const CreateUser = async (req, res) => {
 
 const getUserData = async (req, res) => {
    try {
-      const token = req.cookies
+      const { token } = req.cookies
       if (!token) {
          throw new Error("Token is not valide any more ")
       }
-      const userData = await userSchema.userInfo.find({})
+      const userData = await userSchema.find({})
       res.status(200).send(userData)
    } catch (error) {
       res.status(400).send(error.message)
@@ -60,7 +60,7 @@ const getUserDataById = async (req, res) => {
       if (!(uid == _id)) {
          throw new Error("user is not login...")
       }
-      const userData = await userSchema.userInfo.findById({ _id: _id })
+      const userData = await userSchema.findById({ _id: _id })
       res.status(200).send(userData)
 
    } catch (error) {
@@ -72,7 +72,7 @@ const getUserDataById = async (req, res) => {
 const updateUser = async (req, res) => {
    try {
       const uid = req.params.id
-      const userData = await userSchema.userInfo.findByIdAndUpdate({ _id: uid }, req.body, { new: true })
+      const userData = await userSchema.findByIdAndUpdate({ _id: uid }, req.body, { new: true })
       res.status(200).send(userData)
    } catch (error) {
       res.status(400).send(error.message)
@@ -82,7 +82,7 @@ const updateUser = async (req, res) => {
 const replaceUser = async (req, res) => {
    try {
       const uid = req.params.id
-      const userData = await userSchema.userInfo.findOneAndReplace({ _id: uid }, req.body, { new: true })
+      const userData = await userSchema.findOneAndReplace({ _id: uid }, req.body, { new: true })
       // const replaceUser = await userData.save()
       res.status(200).send(userData)
    } catch (error) {
@@ -94,7 +94,7 @@ const replaceUser = async (req, res) => {
 const deleteUser = async (req, res) => {
    try {
       const uid = req.params.id
-      const userData = await userSchema.userInfo.findOneAndDelete({ _id: uid })
+      const userData = await userSchema.findOneAndDelete({ _id: uid })
       res.status(200).send(userData)
    } catch (error) {
       res.status(400).send(error.message)
