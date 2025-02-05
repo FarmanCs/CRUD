@@ -9,17 +9,14 @@ const { router } = require("./src/routes/todoesRoute")
 const { logOutRouter } = require("./src/routes/userlogOutRoute")
 const app = express()
 
+//EXPRESS MIDLEWARES
 app.use(express.json())
 app.use(cookies())
 
-
+//ROUTES CALL
 app.use('/', userRouter)
 app.use('/', router)
 app.use('/', logOutRouter)
-
-
-
-
 
 
 MongooseConnection().then(() => {

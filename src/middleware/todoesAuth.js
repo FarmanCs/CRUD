@@ -8,15 +8,11 @@ const todoAuth = async (req, res, next) => {
          throw new Error("Token is not valide...")
       }
       const decodedMessage = await jwt.verify(token, "Crud@2025")
-      // console.log(decodedMessage);
       if (!decodedMessage) {
          throw new Error("token decoding problem")
       }
       const { _id } = decodedMessage
-      // console.log("User_ID: ", _id);
-
       const userData = await userModel.findById({ _id: _id })
-      // console.log(userData);
       if (!userData) {
          throw new Error("cant post before signUp")
       }

@@ -1,5 +1,6 @@
 const model = require("../model/user")
 const bycrpt = require("bcrypt")
+const validator = require("validator")
 
 const forgotUserPassword = async (req, res, next) => {
    try {
@@ -9,6 +10,10 @@ const forgotUserPassword = async (req, res, next) => {
          throw new Error("user is not present" + email)
       }
       req.user = User
+      const strongPassword = validator.isStrongPassword(password)
+      if (!strongPassword) {
+         throw new Error("Your password is not strong enough..! ")
+      }
       const hashnewpassword = await bycrpt.hash(password, 10)
       const forget = await model.findByIdAndUpdate({ _id: req.user._id }, { password: hashnewpassword })
 

@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-// const { type } = require("os")
 
 const userData = new mongoose.Schema({
    name: {
@@ -21,7 +20,6 @@ const userData = new mongoose.Schema({
       city: {
          type: String,
       }
-
    },
    gender: {
       type: String,
@@ -45,6 +43,4 @@ const userData = new mongoose.Schema({
    }
 })
 
-// const userInfo = new mongoose.model("user", userData)
 module.exports = mongoose.model("user", userData)
-// module.exports = userInfo 
