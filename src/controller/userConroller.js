@@ -45,8 +45,6 @@ const getUserDataById = async (req, res) => {
    try {
       const uid = req.params.id
       const { token } = req.cookies
-      console.log("userid", typeof (uid), uid);
-
       if (!token) {
          throw new Error("Token is not valide any more ")
       }
@@ -55,8 +53,6 @@ const getUserDataById = async (req, res) => {
          throw new Error("Token decoding problem...!")
       }
       const { _id } = decodeToken
-      console.log("Decoded and De_Structuring id ", typeof (_id), _id);
-
       if (!(uid == _id)) {
          throw new Error("user is not login...")
       }
@@ -83,7 +79,6 @@ const replaceUser = async (req, res) => {
    try {
       const uid = req.params.id
       const userData = await userSchema.findOneAndReplace({ _id: uid }, req.body, { new: true })
-      // const replaceUser = await userData.save()
       res.status(200).send(userData)
    } catch (error) {
       res.status(400).send(error.message)
