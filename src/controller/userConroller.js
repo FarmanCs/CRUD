@@ -3,7 +3,7 @@ const userSchema = require("../model/user")
 const bycrpt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
-
+//post requist to creat user
 const CreateUser = async (req, res) => {
    try {
       const { name, email, address, gender, contact, skills, password } = req.body
@@ -27,7 +27,7 @@ const CreateUser = async (req, res) => {
    }
 }
 
-
+//get requist to get user data
 const getUserData = async (req, res) => {
    try {
       const { token } = req.cookies
@@ -41,6 +41,7 @@ const getUserData = async (req, res) => {
    }
 }
 
+//same as above but here we get user by some input data
 const getUserDataById = async (req, res) => {
    try {
       const uid = req.params.id
@@ -64,7 +65,7 @@ const getUserDataById = async (req, res) => {
    }
 }
 
-
+//this will update user by new data
 const updateUser = async (req, res) => {
    try {
       const uid = req.params.id
@@ -75,6 +76,7 @@ const updateUser = async (req, res) => {
    }
 }
 
+//this will replace user by new data rovided
 const replaceUser = async (req, res) => {
    try {
       const uid = req.params.id
@@ -85,7 +87,7 @@ const replaceUser = async (req, res) => {
    }
 }
 
-
+//this will simple delete user...
 const deleteUser = async (req, res) => {
    try {
       const uid = req.params.id
