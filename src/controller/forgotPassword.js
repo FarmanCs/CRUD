@@ -7,7 +7,7 @@ const forgotPassword = async (req, res) => {
          message: "password forgeted successfully..."
       })
    } catch (error) {
-      res.status(400).send("forgot password succesfuly : " + error.message)
+      res.status(400).send("ERROR : " + error.message)
    }
 }
 
